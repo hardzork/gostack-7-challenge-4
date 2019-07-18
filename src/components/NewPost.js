@@ -2,9 +2,9 @@ import React from "react";
 
 import "./NewPost.css";
 
-function NewPost() {
+function NewPost({ inputChange, formSubmit, valueState }) {
   return (
-    <>
+    <form onSubmit={formSubmit}>
       <div className="new-post">
         <div className="containerNewPost">
           <div className="containerAvatarPost">
@@ -19,6 +19,8 @@ function NewPost() {
               id="newpost"
               rows="3"
               placeholder="No que você está pensando?"
+              onChange={inputChange}
+              value={valueState}
             />
           </div>
         </div>
@@ -28,7 +30,7 @@ function NewPost() {
           </button>
         </div>
       </div>
-    </>
+    </form>
   );
 }
 

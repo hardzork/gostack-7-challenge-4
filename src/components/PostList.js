@@ -6,6 +6,7 @@ import "./PostList.css";
 
 class PostList extends Component {
   state = {
+    newPost: {},
     posts: [
       {
         id: 1,
@@ -17,7 +18,7 @@ class PostList extends Component {
         content: "Pessoal, alguém sabe se a Rocketseat está contratando?",
         comments: [
           {
-            id: 2,
+            id: 1,
             author: {
               name: "Diego Fernandes",
               avatar: "https://avatars2.githubusercontent.com/u/2254731?v=4"
@@ -29,7 +30,7 @@ class PostList extends Component {
         ]
       },
       {
-        id: 3,
+        id: `2`,
         author: {
           name: "Neil Cook",
           avatar: "https://i.pravatar.cc/150?img=8"
@@ -39,7 +40,7 @@ class PostList extends Component {
           "Fala galera, beleza?\nEstou fazendo o Bootcamp GoStack e está sendo muito massa! Alguém mais aí fazendo? Comenta aí na publicação para trocarmos uma idéia",
         comments: [
           {
-            id: 4,
+            id: 1,
             author: {
               name: "Clara Lisboa",
               avatar: "https://i.pravatar.cc/150?img=5"
@@ -49,7 +50,7 @@ class PostList extends Component {
               "Também estou fazendo o Bootcamp e estou adorando! Estou no terceiro módulo sobre Node e já tenho minha API dos desafios construída!"
           },
           {
-            id: 5,
+            id: 2,
             author: {
               name: "Cézar Toledo",
               avatar: "https://i.pravatar.cc/150?img=11"
@@ -61,7 +62,7 @@ class PostList extends Component {
         ]
       },
       {
-        id: 6,
+        id: 3,
         author: {
           name: "Gabriel Lisboa",
           avatar: "https://i.pravatar.cc/150?img=51"
@@ -71,7 +72,7 @@ class PostList extends Component {
           "Fala galera, beleza?\nEstou fazendo o Bootcamp GoStack e está sendo muito massa! Alguém mais aí fazendo? Comenta aí na publicação para trocarmos uma idéia",
         comments: [
           {
-            id: 4,
+            id: 1,
             author: {
               name: "Clara Lisboa",
               avatar: "https://i.pravatar.cc/150?img=5"
@@ -81,7 +82,7 @@ class PostList extends Component {
               "Também estou fazendo o Bootcamp e estou adorando! Estou no terceiro módulo sobre Node e já tenho minha API dos desafios construída!"
           },
           {
-            id: 5,
+            id: 2,
             author: {
               name: "Cézar Toledo",
               avatar: "https://i.pravatar.cc/150?img=11"
@@ -95,10 +96,36 @@ class PostList extends Component {
     ]
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      posts: [this.state.newPost, ...this.state.posts],
+      newPost: null
+    });
+  };
+
+  handleInputChange = e => {
+    let newPost = {
+      id: this.state.posts.length + 1,
+      author: {
+        name: "Robinson Silva Junior",
+        avatar: "https://avatars1.githubusercontent.com/u/21206530"
+      },
+      date: `${new Date().getDate()} Jul 2019`,
+      content: e.target.value,
+      comments: []
+    };
+    this.setState({ newPost: newPost });
+  };
+
   render() {
     return (
       <>
-        <NewPost />
+        <NewPost
+          inputChange={this.handleInputChange}
+          formSubmit={this.handleSubmit}
+          valueState={this.state.newPost ? this.state.newPost.content : ""}
+        />
         <div className="postlist">
           {this.state.posts.map(post => (
             <PostItem key={post.id} {...post} />
