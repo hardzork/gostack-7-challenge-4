@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import PostItem from "./PostItem";
+import NewPost from "./NewPost";
 import "./PostList.css";
 
 class PostList extends Component {
@@ -96,11 +97,14 @@ class PostList extends Component {
 
   render() {
     return (
-      <div className="postlist">
-        {this.state.posts.map(post => (
-          <PostItem key={post.id} {...post} />
-        ))}
-      </div>
+      <>
+        <NewPost />
+        <div className="postlist">
+          {this.state.posts.map(post => (
+            <PostItem key={post.id} {...post} />
+          ))}
+        </div>
+      </>
     );
   }
 }
