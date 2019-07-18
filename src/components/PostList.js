@@ -7,6 +7,7 @@ import "./PostList.css";
 class PostList extends Component {
   state = {
     newPost: {},
+    newComment: {},
     posts: [
       {
         id: 1,
@@ -117,6 +118,28 @@ class PostList extends Component {
     };
     this.setState({ newPost: newPost });
   };
+
+  // handleCommentSubmit = e => {
+  //   e.preventDefault();
+  //   this.setState({
+  //     posts: [this.state.newPost, ...this.state.posts],
+  //     newComment: null
+  //   });
+  // };
+
+  // handleCommentInputChange = (e, post_id) => {
+  //   const post = this.state.posts.find(p => p.id === post_id);
+  //   const newComment = {
+  //     id: post.comments.length + 1,
+  //     author: {
+  //       name: "Robinson Silva Junior",
+  //       avatar: "https://avatars1.githubusercontent.com/u/21206530"
+  //     },
+  //     date: `${new Date().getDate()} Jul 2019`,
+  //     content: e.target.value
+  //   };
+  //   this.setState({ newComment: newComment });
+  // };
 
   render() {
     return (
