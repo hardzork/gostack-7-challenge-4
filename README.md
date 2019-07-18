@@ -1,6 +1,6 @@
 # Simple Facebook Clone
 
-Project used to understand how react works. Class components, Function components, State and etc.
+Project used to understand how react works. Webpack, Babel, Loaders, Class components, Function components, State and etc.
 
 ## Contributing
 
