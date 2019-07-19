@@ -125,15 +125,12 @@ class PostList extends Component {
         return i;
       }
     }
-    return -1; //to handle the case where the value doesn't exist
+    return -1;
   }
 
   handleCommentSubmit = (e, post_id) => {
     e.preventDefault();
-
     const posts = [...this.state.posts];
-    // const post = posts.find(el => el.id === post_id);
-    // post.comments.push(this.state.newComment);
     posts[this.getIndex(post_id, posts, "id")].comments.push(
       this.state.newComment
     );
@@ -154,7 +151,6 @@ class PostList extends Component {
       date: `${new Date().getDate()} Jul 2019`,
       content: e.target.value
     };
-    // post.comments.push(newComment);
     this.setState({ newComment: newComment });
   };
 
