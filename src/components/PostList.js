@@ -119,27 +119,44 @@ class PostList extends Component {
     this.setState({ newPost: newPost });
   };
 
-  // handleCommentSubmit = e => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     posts: [this.state.newPost, ...this.state.posts],
-  //     newComment: null
-  //   });
-  // };
+  getIndex(value, arr, prop) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i][prop] === value) {
+        return i;
+      }
+    }
+    return -1; //to handle the case where the value doesn't exist
+  }
 
-  // handleCommentInputChange = (e, post_id) => {
-  //   const post = this.state.posts.find(p => p.id === post_id);
-  //   const newComment = {
-  //     id: post.comments.length + 1,
-  //     author: {
-  //       name: "Robinson Silva Junior",
-  //       avatar: "https://avatars1.githubusercontent.com/u/21206530"
-  //     },
-  //     date: `${new Date().getDate()} Jul 2019`,
-  //     content: e.target.value
-  //   };
-  //   this.setState({ newComment: newComment });
-  // };
+  handleCommentSubmit = (e, post_id) => {
+    e.preventDefault();
+
+    const posts = [...this.state.posts];
+    // const post = posts.find(el => el.id === post_id);
+    // post.comments.push(this.state.newComment);
+    posts[this.getIndex(post_id, posts, "id")].comments.push(
+      this.state.newComment
+    );
+    this.setState({
+      posts: [...posts],
+      newComment: null
+    });
+  };
+
+  handleCommentInputChange = (e, post_id) => {
+    let post = this.state.posts.find(p => p.id === post_id);
+    const newComment = {
+      id: post.comments.length + 1,
+      author: {
+        name: "Robinson Silva Junior",
+        avatar: "https://avatars1.githubusercontent.com/u/21206530"
+      },
+      date: `${new Date().getDate()} Jul 2019`,
+      content: e.target.value
+    };
+    // post.comments.push(newComment);
+    this.setState({ newComment: newComment });
+  };
 
   render() {
     return (
@@ -151,7 +168,19 @@ class PostList extends Component {
         />
         <div className="postlist">
           {this.state.posts.map(post => (
-            <PostItem key={post.id} {...post} />
+            <PostItem
+              key={post.id}
+              {...post}
+              newCommentInputChage={event =>
+                this.handleCommentInputChange(event, post.id)
+              }
+              newCommentSubmit={event =>
+                this.handleCommentSubmit(event, post.id)
+              }
+              newCommentValueState={
+                this.state.newComment ? this.state.newComment.content : ""
+              }
+            />
           ))}
         </div>
       </>

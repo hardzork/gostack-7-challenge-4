@@ -2,17 +2,21 @@ import React from "react";
 
 import "./NewComment.css";
 
-function NewComment() {
+function NewComment({
+  newCommentInputChage,
+  newCommentSubmit,
+  newCommentValueState
+}) {
   return (
-    <form>
+    <form onSubmit={newCommentSubmit}>
       <div className="containerNewComment">
         <div className="containerComment">
           <textarea
             id="newcomment"
             rows="3"
             placeholder="Escreva aqui seu comentário"
-            // onChange={inputChange}
-            // value={valueState}
+            onChange={newCommentInputChage}
+            value={newCommentValueState}
           />
         </div>
       </div>
